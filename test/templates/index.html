@@ -1,0 +1,139 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像アップロードアプリ</title>
+</head>
+<body>
+    <h1>ナンバープレート検知</h1>
+    <h3>・ナンバープレートの画像アップロード場所，結果表示</h3>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="image">ナンバープレートを含んだ車両の画像をアップロードしてください。ただし、画像ファイルはpng,jpeg,jpg,gifのみアップロードできます。</label><br>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit">アップロード</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const imageFile = document.getElementById("image").files[0];
+            formData.append("image", imageFile);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = `${data.result}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
+<br>
+<p class="lead mb-4">地域，ナンバープレート</p>
+{{local}} {{number}}
+<br>
+<p class="lead mb-4">訪れた時刻</p>
+{{date}}
+<br>
+<p class="lead mb-4">この車両は{{local}}から来ました。</p>
+<br>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開始日と終了日を選択</title>
+</head>
+<body>
+    <h3>・データ解析</h3>
+    データ解析開始日と、終了日を選択してください
+    <form id="dateForm">
+        <label for="start_date">date_start:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">date_finish:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <button type="submit">送信</button>
+    </form>
+    <div id="result1"></div>
+
+    <script>
+        document.getElementById("dateForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("/submit_dates", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result1").innerText = `結果: ${data.result}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<br>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選択肢を選ぶアプリ</title>
+</head>
+<body>
+    地域別に分類するか、県別で分類するかを選択してください
+    <form id="choiceForm">
+        situation:
+        <input type="radio" id="option1" name="option" value="地域別">
+        <label for="option1">地域別</label>
+
+        <input type="radio" id="option2" name="option" value="県別">
+        <label for="option2">県別</label>
+
+        <button type="submit">送信</button>
+    </form>
+    <div id="result2"></div>
+
+    <script>
+        document.getElementById("choiceForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            
+            fetch("/submit_choice", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result2").innerText = `結果: ${data.result}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

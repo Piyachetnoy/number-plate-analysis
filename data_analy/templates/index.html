@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>画像アップロードアプリ</title>
+  </head>
+  <body>
+    <h1>ナンバープレート検知</h1>
+
+    <!-- 画像アップロードフォーム -->
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label for="image"
+        >ナンバープレートを含んだ車両の画像をアップロードしてください。ただし、画像ファイルはpng,
+        jpeg, jpg, gifのみアップロードできます。</label
+      >
+      <input type="file" id="image" name="image" accept="image/*" required />
+      <button type="submit">アップロード</button>
+    </form>
+    <div id="result"></div>
+
+    <!-- 日付選択フォーム -->
+    <h2>データ解析開始日と終了日を選択してください</h2>
+    <form id="dateForm">
+      <label for="date_start">開始日:</label>
+      <input type="date" id="date_start" name="date_start" required />
+      <label for="date_finish">終了日:</label>
+      <input type="date" id="date_finish" name="date_finish" required />
+      <button type="submit">送信</button>
+    </form>
+    <div id="resultDate" class="result"></div>
+
+    <!-- 選択肢フォーム -->
+    <h2>地域別に分類するか、県別で分類するかを選択してください</h2>
+    <form id="choiceForm">
+      <label>
+        <input type="radio" id="option1" name="option" value="地域別" />
+        地域別 </label
+      ><br />
+      <label>
+        <input type="radio" id="option2" name="option" value="県別" />
+        県別 </label
+      ><br />
+      <button type="submit">送信</button>
+    </form>
+    <div id="result3"></div>
+    <img id="graphImage" alt="統計グラフ" style="display: none" />
+
+    <script>
+      // 画像アップロードの処理
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData();
+          const imageFile = document.getElementById("image").files[0];
+          formData.append("image", imageFile);
+
+          fetch("/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById(
+                "result"
+              ).innerText = `結果: ${data.result}`;
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+
+      // 日付選択の処理
+      document
+        .getElementById("dateForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+
+          fetch("/submit_date", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById(
+                "resultDate"
+              ).innerText = `結果: ${data.result}`;
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+
+      // 選択肢フォームの処理
+      document
+        .getElementById("choiceForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(this);
+
+          fetch("/submit_choice", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.blob())
+            .then((blob) => {
+              const url = URL.createObjectURL(blob);
+              const img = document.getElementById("graphImage");
+              img.src = url;
+              img.style.display = "block";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

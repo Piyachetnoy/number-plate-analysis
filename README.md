@@ -14,7 +14,7 @@ This guide provides instructions for setting up and installing necessary librari
    pip install Flask,pandas,matplotlib,japanize_matplotlib,ultralytics,easyocr,torch==2.1.2,torchvision==0.16.2,torchaudio==2.1.2
    ```
    
-# Project Dependencies
+## Project Dependencies
 
 The following libraries are required for this project:
 
@@ -34,11 +34,7 @@ The following libraries are required for this project:
 - torchvision==0.16.2  
 - torchaudio==2.1.2  
 
----
-
-# File Structure
-
-
+<!-- 
 /アプリ/  
 |    
 |-/results/  
@@ -50,6 +46,6 @@ The following libraries are required for this project:
 |   |-index_waka/html  
 |-app.py  
 |-best.pt  
-
+--!>
 
 

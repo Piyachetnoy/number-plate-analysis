@@ -1,12 +1,19 @@
-・pipでインストールするライブラリ名をrequirements.txtに記載  
-pip install -r requirements.txt でライブラリをまとめてインストール  
+# Project Setup Instructions
 
-・注意
-pythonのバージョンを最新(3.12.4)にすると動かなかった。pythonのバージョンを3.1にすると動いた。  
-理由:pytorchなどのバージョンを古いものにする必要があったから
-    python -m pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
-    以上のコードで旧バージョンのpytorchなどをインストールする必要がある
-    最新バージョンのpython(3.12.4)ではpytorchのバージョンを一番古いもので2.2.0までしか下げることしかできないため，pytorchのバージョンを2.1.2にできないことが原因だと考えられる。
+This guide provides instructions for setting up and installing necessary libraries for the project. Please follow each step carefully to avoid compatibility issues.
+
+## Prerequisites
+
+- **Python Version**: Ensure you are using **Python 3.10** for compatibility with the necessary versions of PyTorch libraries. Using the latest Python version (3.12.4) may cause compatibility issues as PyTorch version 2.1.2 and lower are not supported.
+
+## Installation Instructions
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone <repository_url>
+   cd <repository_directory>
+
 
 
 ・使用したライブラリ  

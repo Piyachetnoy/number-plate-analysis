@@ -14,24 +14,31 @@ This guide provides instructions for setting up and installing necessary librari
    pip install Flask,pandas,matplotlib,japanize_matplotlib,ultralytics,easyocr,torch==2.1.2,torchvision==0.16.2,torchaudio==2.1.2
    ```
    
-Flask  
-os  
-byteslO  
-pandas  
-matplotlib  
-japanize_matplotlib  
-FigureCanvasAgg  
-ultralytics  
-easyocr  
-cv2  
-from PIL import Image,ImageDraw  
-string  
-torch==2.1.2  
-torchvision==0.16.2  
-torchaudio==2.1.2  
-__________________________________
+# Project Dependencies
 
-．ファイル配置  
+The following libraries are required for this project:
+
+- Flask  
+- os  
+- bytesIO  
+- pandas  
+- matplotlib  
+- japanize_matplotlib  
+- FigureCanvasAgg  
+- ultralytics  
+- easyocr  
+- cv2  
+- Pillow (PIL) - `from PIL import Image, ImageDraw`  
+- string  
+- torch==2.1.2  
+- torchvision==0.16.2  
+- torchaudio==2.1.2  
+
+---
+
+# File Structure
+
+
 /アプリ/  
 |    
 |-/results/  

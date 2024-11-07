@@ -11,7 +11,7 @@ This guide provides instructions for setting up and installing necessary librari
 1. **pip install libraries**
 
    ```bash
-   pip install Flask,pandas,matplotlib,japanize_matplotlib,ultralytics,easyocr,torch==2.1.2,torchvision==0.16.2,torchaudio==2.1.2
+   pip install Flask pandas matplotlib japanize_matplotlib ultralytics easyocr torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2
    ```
    
 ## Project Dependencies

@@ -6,7 +6,7 @@ This guide provides instructions for setting up and installing necessary librari
 
 - **Python Version**: Ensure you are using **Python 3.10** for compatibility with the necessary versions of PyTorch libraries. Using the latest Python version (3.12.4) may cause compatibility issues as PyTorch version 2.1.2 and lower are not supported.
 
-## Installation Instructions
+## Install Dependencies
 
 1. **Clone the Repository**
 
@@ -14,6 +14,7 @@ This guide provides instructions for setting up and installing necessary librari
    pip install Flask,pandas,matplotlib,japanize_matplotlib,ultralytics,easyocr,torch==2.1.2,torchvision==0.16.2,torchaudio==2.1.2
    ```
 
+<--
 ・使用したライブラリ  
 Flask  
 os  
